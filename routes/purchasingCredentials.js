@@ -1,84 +1,51 @@
 import express from 'express';
 
-import { UserEmails } from '../database';
-
-// import {
-//   GetUserMwsCredentials
-// } from '../controllers/users';
-// import { InventoryReadGrant } from '../controllers/grants';
-// import Users from '../models/users';
-
+import * as UserEmails from '../controllers/UserEmails';
 const Router = express.Router();
 
 Router.route('/add').post(async (req, res) => {
-  const { userId, email } = req.body;
-  console.log({ userId, email });
+  const createRes = await UserEmails.Create(req);
 
-  const emails = await UserEmails.create({ userId, email });
-
-  console.log({ emails });
-
-  res.status(200).send({ emails });
-  // SaveErrorDetails({ jobId, productId, error, image, insertTime })
-  //   .then((insertResponse) => {
-  //     res.send({ status: 200, insertResponse });
-  //   }).catch((err) => {
-  //     console.error({err});
-  //     res.send({ status: 500, error: true, reason: err });
-  //   });
+  res.status(200).send({ createRes });
 });
 
-
-// Create blog post
-Router.post('/', async (req, res) => {
+Router.get('/all', async (req, res) => {
     try {
-        res.send('creating post');
+        // res.send('getting all posts');
+  const getRes = await UserEmails.GetAll(req);
+
+  res.status(200).send({ getRes });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
-
-// Get all blog posts
-Router.get('/', async (req, res) => {
-    try {
-        res.send('getting all posts');
-
-        // const data = await Accounts.findAll({
-        //   attributes: ["id", "email", "forwarder_email", "credentials_count"],
-        //   include: [{ model: sequelize.models.users, attributes: ["email"] }]
-        // });
-
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
-
-
-// Get post by id
 Router.get('/:id', async (req, res) => {
     try {
-        res.send('getting single post');
+        // res.send('getting single post');
+        const getRes = await UserEmails.Get(req);
+
+        res.status(200).send({ getRes });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
-
-// Update blog post
-Router.patch('/:id', async (req, res) => {
+Router.put('/update/:id', async (req, res) => {
     try {
-        res.send('updating post');
+        const updateRes = await UserEmails.Update(req);
+        res.status(200).send(updateRes);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
 
-
-// Delete a blog post
 Router.delete('/:id', async (req, res) => {
     try {
-        res.send('deleting post');
+        // res.send('deleting post');
+        const delRes = await UserEmails.Delete(req);
+
+        res.status(200).send({ delRes });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
