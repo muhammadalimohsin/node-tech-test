@@ -7,34 +7,28 @@ export const Create = async (req) => {
 
 export const Update = async (req) => {
   const { id } = req.params;
-  console.log({ id });
-
   await DB.creditCards.update({ ...req.body }, {
     where: {
       id
     }
   })
-  const res = await DB.creditCards.findOne({ where: { id } });
+  const res = await DB.creditCards.findOne({ where: { id, userId: req.user.id } });
   return { data: res, success: true };
 }
 
 export const Get = async (req) => {
   const { id } = req.params;
-  console.log({ id });
-
-  const res = await DB.creditCards.findOne({ where: { id } });
+  const res = await DB.creditCards.findOne({ where: { id, userId: req.user.id } });
   return res;
 }
 
 export const GetAll = async (req) => {
-  const res = await DB.creditCards.findAll();
+  const res = await DB.creditCards.findAll({ where: { userId: req.user.id } });
   return res;
 }
 
 export const Delete = async (req) => {
   const { id } = req.params;
-  console.log({ id });
-
   const res = await DB.creditCards.destroy({ where: { id } });
   return res;
 }

@@ -1,21 +1,14 @@
-import { extend } from 'lodash';
 import passport from 'passport';
-// import bcrypt from 'bcrypt';
-// import { Strategy as LocalStrategy } from 'passport-local';
-
 import { Strategy as JWTstrategy, ExtractJwt } from 'passport-jwt';
-const { JWT_SECRET } = process.env;
 
-console.log({ JWT_SECRET });
+const { JWT_SECRET } = process.env;
 
 const JWTStrategy = new JWTstrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: JWT_SECRET
 }, (decryptedData, done) => {
-
   console.log({ decryptedData });
-  console.log('I am in \"fromAuthHeaderWithScheme\"');
-  done(null, { email: 'email', auth: true });
+  done(null, { email: 'authTesting@eamil.com', id: 11 });
 
   // Users.aggregate([
   //   { $match: { email } },

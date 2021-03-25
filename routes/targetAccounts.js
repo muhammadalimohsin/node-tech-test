@@ -32,7 +32,6 @@ Router.get('/:id', async (req, res) => {
 
 Router.put('/update/:id', async (req, res) => {
   try {
-    console.log(req.body);
     const updateRes = await TargetAccounts.Update(req);
     res.status(200).send(updateRes);
   } catch (error) {

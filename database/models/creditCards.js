@@ -3,7 +3,7 @@ const CreditCards = (sequelize, DataTypes) => {
     "creditCards",
     {
       userId: {
-        type: DataTypes.STRING(70)
+        type: DataTypes.INTEGER
       },
       cardHolderName: {
         type: DataTypes.STRING(100)

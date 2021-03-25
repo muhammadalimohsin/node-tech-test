@@ -1,54 +1,26 @@
-import fs from 'fs';
-import path from 'path';
 import Sequelize from 'sequelize';
 import * as files from './models';
-const basename = path.basename(__filename);
-// import { MYSQL } from `../../environment/${process.env.STAGE}`;
-
-// const MYSQL = {
-//   USERNAME: '',
-//   PASSWORD: '12345678',
-//   HOST: 'localhost',
-//   DIALECT: 'postgres  ',
-//   DATABASE: 'Sales-Support-AO'
-// };
-
-// const sequelize = new Sequelize(MYSQL.DATABASE, MYSQL.USERNAME, MYSQL.PASSWORD, {
-//   // host: MYSQL.HOST,
-//   dialect: MYSQL.DIALECT,
-//   // port: MYSQL.PORT,
-//   dialectOptions: {
-//     connectTimeout: 50000
-//   },
-//   pool: {
-//     max: 150,
-//     min: 0,
-//     idle: 10000
-//   },
-//   define: {
-//     timestamps: true
-//   }
-// });
-
+import MYDB from '../config/config.js';
 
 let db = {};
-const sequelize = new Sequelize('Sales-Support-AO', 'postgres', '12345678', {
+const sequelize = new Sequelize(MYDB.DB_NAME, MYDB.DB_USERNAME, MYDB.DB_PASSWORD, {
   host: 'localhost',
   dialect: 'postgres',
+  dialectOptions: {
+    connectTimeout: 50000
+  },
   pool: {
     max: 150,
     min: 0,
     idle: 10000
+  },
+  define: {
+    timestamps: true
   }
 });
 
-console.log({ files });
 Object.keys(files).forEach((fileName) => {
-  console.log('\n\n\n',{ fileName });
-  console.log({ functionName: files[fileName]});
   const model = files[fileName](sequelize, Sequelize.DataTypes);
-  console.log({ model });
-  console.log({ modelName: model.name });
   db[model.name] = model;
 });
 

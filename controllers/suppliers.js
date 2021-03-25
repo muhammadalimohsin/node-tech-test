@@ -7,34 +7,28 @@ export const Create = async (req) => {
 
 export const Update = async (req) => {
   const { id } = req.params;
-  console.log({ id });
-
   await DB.suppliers.update({ ...req.body }, {
     where: {
       id
     }
   })
-  const res = await DB.suppliers.findOne({ where: { id } });
+  const res = await DB.suppliers.findOne({ where: { id, userId: req.user.id } });
   return { data: res, success: true };
 }
 
 export const Get = async (req) => {
   const { id } = req.params;
-  console.log({ id });
-
-  const res = await DB.suppliers.findOne({ where: { id } });
+  const res = await DB.suppliers.findOne({ where: { id, userId: req.user.id } });
   return res;
 }
 
 export const GetAll = async (req) => {
-  const res = await DB.suppliers.findAll();
+  const res = await DB.suppliers.findAll({ where: { userId: req.user.id } });
   return res;
 }
 
 export const Delete = async (req) => {
   const { id } = req.params;
-  console.log({ id });
-
   const res = await DB.suppliers.destroy({ where: { id } });
   return res;
 }
