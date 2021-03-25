@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
-import * as files from './models/creditCards';
+import * as files from './models';
 const basename = path.basename(__filename);
 // import { MYSQL } from `../../environment/${process.env.STAGE}`;
 
@@ -42,9 +42,10 @@ const sequelize = new Sequelize('Sales-Support-AO', 'postgres', '12345678', {
   }
 });
 
+console.log({ files });
 Object.keys(files).forEach((fileName) => {
-  console.log({ files, fileName });
-  console.log(files[fileName]);
+  console.log('\n\n\n',{ fileName });
+  console.log({ functionName: files[fileName]});
   const model = files[fileName](sequelize, Sequelize.DataTypes);
   console.log({ model });
   console.log({ modelName: model.name });
