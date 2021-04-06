@@ -12,7 +12,12 @@ export const Update = async (req) => {
       id
     }
   })
-  const res = await DB.userEmails.findOne({ where: { id, userId: req.user.id } });
+  const res = await DB.userEmails.findOne({
+    where: { id, userId: req.user.id },
+    include: [
+      { model: DB.users }
+    ]
+  });
   return { data: res, success: true };
 }
 
@@ -20,12 +25,21 @@ export const Get = async (req) => {
   const { id } = req.params;
   console.log({ ID: req.user.id });
 
-  const res = await DB.userEmails.findOne({ where: { id, userId: req.user.id } });
+  const res = await DB.userEmails.findOne({
+    where: { id, userId: req.user.id },
+    include: [
+      { model: DB.users }
+    ]});
   return res;
 }
 
 export const GetAll = async (req) => {
-  const res = await DB.userEmails.findAll({ where: { userId: req.user.id } });
+  const res = await DB.userEmails.findAll({
+    where: { userId: req.user.id },
+    include: [
+      { model: DB.users }
+    ]
+  });
   return res;
 }
 

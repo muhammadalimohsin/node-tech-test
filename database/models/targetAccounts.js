@@ -39,6 +39,12 @@ const TargetAccounts = (sequelize, DataTypes) => {
     }
   );
 
+  TargetAccounts.associate = function (models) {
+    TargetAccounts.belongsTo(models.users);
+    TargetAccounts.belongsTo(models.userEmails);
+    TargetAccounts.belongsTo(models.creditCards);
+  };
+
   return TargetAccounts;
 }
 

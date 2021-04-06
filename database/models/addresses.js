@@ -26,6 +26,10 @@ const Addresses = (sequelize, DataTypes) => {
     }
   );
 
+  Addresses.associate = function (models) {
+    Addresses.belongsTo(models.users);
+  };
+
   return Addresses;
 }
 

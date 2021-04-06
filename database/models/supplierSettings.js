@@ -35,6 +35,11 @@ const SupplierSettings = (sequelize, DataTypes) => {
     }
   );
 
+  SupplierSettings.associate = function (models) {
+    SupplierSettings.belongsTo(models.users);
+    SupplierSettings.belongsTo(models.suppliers);
+  };
+
   return SupplierSettings;
 }
 

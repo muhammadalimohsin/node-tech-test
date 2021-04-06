@@ -12,18 +12,38 @@ export const Update = async (req) => {
       id
     }
   })
-  const res = await DB.creditCards.findOne({ where: { id, userId: req.user.id } });
+  const res = await DB.creditCards.findOne({
+    where: { id, userId: req.user.id },
+    include: [
+      { model: DB.users },
+      { model: DB.addresses }
+    ]
+  });
   return { data: res, success: true };
 }
 
 export const Get = async (req) => {
   const { id } = req.params;
-  const res = await DB.creditCards.findOne({ where: { id, userId: req.user.id } });
+  const res = await DB.creditCards.findOne({
+    where: { id, userId: req.user.id },
+    include: [
+      { model: DB.users },
+      { model: DB.addresses }
+    ]
+  });
   return res;
 }
 
 export const GetAll = async (req) => {
-  const res = await DB.creditCards.findAll({ where: { userId: req.user.id } });
+  const res = await DB.creditCards.findAll(
+    {
+      where: { userId: req.user.id },
+      include: [
+        { model: DB.users },
+        { model: DB.addresses }
+      ]
+    }
+  );
   return res;
 }
 

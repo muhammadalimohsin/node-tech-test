@@ -12,18 +12,18 @@ export const Update = async (req) => {
       id
     }
   })
-  const res = await DB.users.findOne({ where: { id, userId: req.user.id } });
+  const res = await DB.users.findOne({ where: { id } });
   return { data: res, success: true };
 }
 
 export const Get = async (req) => {
   const { id } = req.params;
-  const res = await DB.users.findOne({ where: { id, userId: req.user.id } });
+  const res = await DB.users.findOne({ where: { id } });
   return res;
 }
 
 export const GetAll = async (req) => {
-  const res = await DB.users.findAll({ where: { userId: req.user.id } });
+  const res = await DB.users.findAll();
   return res;
 }
 

@@ -1,6 +1,7 @@
 import passport from 'passport';
 
 import app from '../config/express';
+import UsersRouter from './users';
 import TargetAccountsRouter from './targetAccounts';
 import UserEmailsRouter from './userEmails';
 import SuppliersRouter from './suppliers';
@@ -9,6 +10,7 @@ import AddressesRouter from './addresses';
 import CreditCardsRouter from './creditCards';
 
 app.use(passport.initialize());
+app.use('/api/v1/user', passport.authenticate('jwt', { session: false }), UsersRouter);
 app.use('/api/v1/target_account', passport.authenticate('jwt', { session: false }), TargetAccountsRouter);
 app.use('/api/v1/user_email', passport.authenticate('jwt', { session: false }), UserEmailsRouter);
 app.use('/api/v1/supplier', passport.authenticate('jwt', { session: false }), SuppliersRouter);

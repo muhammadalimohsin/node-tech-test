@@ -8,7 +8,7 @@ const JWTStrategy = new JWTstrategy({
   secretOrKey: JWT_SECRET
 }, (decryptedData, done) => {
   console.log({ decryptedData });
-  done(null, { email: 'authTesting@eamil.com', id: 11 });
+  done(null, { email: 'authTesting@eamil.com', id: 1 });
 
   // Users.aggregate([
   //   { $match: { email } },

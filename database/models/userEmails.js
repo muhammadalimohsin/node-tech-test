@@ -12,6 +12,10 @@ const UserEmails = (sequelize, DataTypes) => {
     }
   );
 
+  UserEmails.associate = function (models) {
+    UserEmails.belongsTo(models.users);
+  };
+
   return UserEmails;
 }
 

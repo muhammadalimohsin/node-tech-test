@@ -17,6 +17,11 @@ const CreditCards = (sequelize, DataTypes) => {
     }
   );
 
+  CreditCards.associate = function (models) {
+    CreditCards.belongsTo(models.users);
+    CreditCards.belongsTo(models.addresses);
+  };
+
   return CreditCards;
 }
 
