@@ -1,30 +1,17 @@
-require("dotenv/config")
-const { AUTO_ORDER_DB_USER, AUTO_ORDER_DB_PASS, AUTO_ORDER_DB_NAME, AUTO_ORDER_DB_HOST, CONN_POOL_SIZE } = process.env
-module.exports = {
-  development: {
-    username: AUTO_ORDER_DB_USER,
-    password: AUTO_ORDER_DB_PASS,
-    database: AUTO_ORDER_DB_NAME,
-    host: AUTO_ORDER_DB_HOST,
-    dialect: "mysql",
-    pool: {
-      max: parseInt(CONN_POOL_SIZE) || 5,
-      min: 0,
-      acquire: 600000,
-      idle: 5000
-    }
-  },
-  production: {
-    username: AUTO_ORDER_DB_USER,
-    password: AUTO_ORDER_DB_PASS,
-    database: AUTO_ORDER_DB_NAME,
-    host: AUTO_ORDER_DB_HOST,
-    dialect: "mysql",
-    pool: {
-      max: parseInt(CONN_POOL_SIZE) || 5,
-      min: 0,
-      acquire: 600000,
-      idle: 5000
-    }
-  }
-}
+const {
+  NODE_ENV,
+  LOCAL_DB_NAME,
+  LOCAL_DB_USERNAME,
+  LOCAL_DB_PASSWORD,
+  PROD_DB_NAME,
+  PROD_DB_USERNAME,
+  PROD_DB_PASSWORD
+} = process.env
+
+const isProd = () => NODE_ENV === 'production';
+
+export default {
+  DB_NAME: isProd() ? PROD_DB_NAME : LOCAL_DB_NAME,
+  DB_USERNAME: isProd() ? PROD_DB_USERNAME : LOCAL_DB_USERNAME,
+  DB_PASSWORD: isProd() ? PROD_DB_PASSWORD : LOCAL_DB_PASSWORD
+};

@@ -3,7 +3,7 @@ const UserEmails = (sequelize, DataTypes) => {
     "userEmails",
     {
       userId: {
-        type: DataTypes.STRING(70)
+        type: DataTypes.INTEGER
       },
       email: {
         type: DataTypes.STRING(100),
@@ -11,6 +11,10 @@ const UserEmails = (sequelize, DataTypes) => {
       }
     }
   );
+
+  UserEmails.associate = function (models) {
+    UserEmails.belongsTo(models.users);
+  };
 
   return UserEmails;
 }
