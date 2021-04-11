@@ -1,17 +1,29 @@
-import userEmails from './userEmails';
-import creditCards from './creditCards';
-import users from './users';
-import addresses from './addresses';
+import catagories from './catagories';
+import customerDemographics from './customerDemographics';
+import customerCustomerDemo from './customerCustomerDemo';
+import customers from './customers';
+import employeeTerritories from './employeeTerritories';
 import suppliers from './suppliers';
-import supplierSettings from './supplierSettings';
-import targetAccounts from './targetAccounts';
+import employees from './employees';
+import orderDetails from './orderDetails';
+import orders from './orders';
+import products from './products';
+import region from './region';
+import shippers from './shippers';
+import territories from './territories';
 
 export {
-  userEmails,
-  creditCards,
-  users,
-  addresses,
+  catagories,
+  customerDemographics,
+  customerCustomerDemo,
+  customers,
+  employeeTerritories,
   suppliers,
-  supplierSettings,
-  targetAccounts
+  employees,
+  orderDetails,
+  orders,
+  products,
+  region,
+  shippers,
+  territories
 };

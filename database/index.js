@@ -1,11 +1,17 @@
 import Sequelize from 'sequelize';
+
 import * as files from './models';
-import MYDB from '../config/config.js';
+const {
+  LOCAL_DB_HOST,
+  LOCAL_DB_NAME,
+  LOCAL_DB_USERNAME,
+  LOCAL_DB_PASSWORD
+} = process.env;
 
 let db = {};
-const sequelize = new Sequelize(MYDB.DB_NAME, MYDB.DB_USERNAME, MYDB.DB_PASSWORD, {
-  host: 'localhost',
-  dialect: 'postgres',
+const sequelize = new Sequelize(LOCAL_DB_NAME, LOCAL_DB_USERNAME, LOCAL_DB_PASSWORD, {
+  host: LOCAL_DB_HOST,
+  dialect: 'mysql',
   dialectOptions: {
     connectTimeout: 50000
   },
@@ -26,6 +32,7 @@ Object.keys(files).forEach((fileName) => {
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
+    console.log({ modelName });
     db[modelName].associate(db);
   }
 });

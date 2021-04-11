@@ -1,11 +1,13 @@
 {
-  "name": "sales-support-ao-api",
+  "name": "technical-test-node-js",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./index.js --watch src --exec babel-node",
-    "start-prod": "node ./index.js --watch src --exec babel-node"
+    "start-prod": "node ./index.js --watch src --exec babel-node",
+    "create:db": "node ./scripts/createDB.js",
+    "ao:migration:gen": "sequelize-cli migration:generate --name $NAME"
   },
   "author": "",
   "license": "ISC",
@@ -16,15 +18,15 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/runtime": "^7.6.3",
     "babel-polyfill": "^6.26.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
+    "mysql2": "^2.2.5",
     "nodemon": "^1.19.4",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "pg": "^8.5.1",
-    "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",
     "sequelize-cli": "^6.2.0"
   }

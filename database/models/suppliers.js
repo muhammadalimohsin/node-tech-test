@@ -2,24 +2,46 @@ const Suppliers = (sequelize, DataTypes) => {
   const Suppliers = sequelize.define(
     "suppliers",
     {
-      userId: {
-        type: DataTypes.INTEGER
+      supplierId: {
+        type: DataTypes.INTEGER,
+        unique: true,
+        primaryKey: true
       },
-      marketPlace: {
-        type: DataTypes.ENUM('walmart', 'amazon')
+      companyName: {
+        type: DataTypes.STRING(40)
       },
-      consumerKey: {
-        type: DataTypes.STRING(100)
+      contactName: {
+        type: DataTypes.STRING(30)
       },
-      secretKey: {
-        type: DataTypes.STRING(100)
+      contactTitle: {
+        type: DataTypes.STRING(30)
+      },
+      address: {
+        type: DataTypes.STRING(60)
+      },
+      city: {
+        type: DataTypes.STRING(15)
+      },
+      region: {
+        type: DataTypes.STRING(15)
+      },
+      postalCode: {
+        type: DataTypes.STRING(10)
+      },
+      country: {
+        type: DataTypes.STRING(15)
+      },
+      phone: {
+        type: DataTypes.STRING(24)
+      },
+      fax: {
+        type: DataTypes.STRING(24)
+      },
+      homePage: {
+        type: DataTypes.TEXT
       }
     }
   );
-
-  Suppliers.associate = function (models) {
-    Suppliers.belongsTo(models.users);
-  };
 
   return Suppliers;
 }
